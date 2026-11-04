@@ -1,0 +1,260 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Essential Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+
+% --- Professional Color Palette ---
+\definecolor{primary}{RGB}{15, 44, 89}        % Deep Mepco Navy
+\definecolor{secondary}{RGB}{30, 58, 138}     % Royal Blue
+\definecolor{accent}{RGB}{180, 83, 9}         % Dark Amber
+\definecolor{boxbg}{RGB}{248, 250, 252}       % Light Slate
+\definecolor{boxborder}{RGB}{203, 213, 225}   % Slate Border
+\definecolor{speechbg}{RGB}{254, 249, 195}    % Light Yellow Callout
+\definecolor{speechborder}{RGB}{234, 179, 8}  % Yellow Border
+\definecolor{qabg}{RGB}{241, 245, 249}        % QA Light Gray
+
+% --- Section Formatting ---
+\titleformat{\section}
+  {\color{primary}\normalfont\Large\bfseries}
+  {\thesection}{1em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{secondary}\normalfont\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\color{accent}\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% --- Reusable Custom Boxes ---
+\newtcolorbox{speechbox}[1][]{
+  colback=speechbg,
+  colframe=speechborder,
+  arc=3mm,
+  boxrule=1pt,
+  fonttitle=\bfseries\color{accent},
+  title={#1},
+  breakable
+}
+
+\newtcolorbox{qabox}[1][]{
+  colback=qabg,
+  colframe=primary,
+  arc=2mm,
+  boxrule=0.8pt,
+  fonttitle=\bfseries\color{white},
+  coltitle=white,
+  colbacktitle=primary,
+  title={#1},
+  breakable
+}
+
+\newtcolorbox{summarybox}[1][]{
+  colback=boxbg,
+  colframe=boxborder,
+  arc=2mm,
+  boxrule=0.8pt,
+  title={#1},
+  fonttitle=\bfseries\color{secondary},
+  breakable
+}
+
+\begin{document}
+
+% --- College & Project Header Banner ---
+\begin{center}
+    {\LARGE \textbf{\color{primary} MEPCO SCHLENK ENGINEERING COLLEGE (AUTONOMOUS)}}\\[3pt]
+    {\large \textbf{Department of Computer Science and Engineering}}\\[2pt]
+    {\small \textbf{Mini Project III --- 5th Semester Lab Exam \& Viva Preparation Notes}}\\[6pt]
+    \rule{\linewidth}{1.2pt}\\[6pt]
+    {\Large \textbf{\color{secondary} An AI-Powered Full Stack Oil Factory Management System with Cloud Computing}}\\[4pt]
+    \textbf{Author / Presenter:} Rahul R (\texttt{24BCS175}) \quad$|$ \quad \textbf{Team Member:} Raghul S (\texttt{24BCS173})\\[2pt]
+    \textbf{Project Guide:} Mrs. Gladima Nisia T \quad$|$ \quad \textbf{Assigned Presentation Slides:} \textbf{Page 4 \& Page 5}
+\end{center}
+
+\vspace{0.2cm}
+
+% ==============================================================================
+% SECTION 1: SLIDE 4 - EXPECTED OUTCOMES
+% ==============================================================================
+\section{Slide 4: Expected Outcomes --- Structured Notes}
+
+\subsection{1. Smart Factory Management (Operational Digitization)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Problem Solved:} Eliminates error-prone manual physical ledgers, scattered paper weighbridge slips, and offline Excel sheets that cause operational delays and data discrepancies.
+    \item \textbf{Centralized Reactive ERP:} Unifies all factory operations into a single responsive web interface:
+    \[
+    \text{Raw Seed Inward} \longrightarrow \text{Storage Silos} \longrightarrow \text{Expeller Crushing} \longrightarrow \text{Oil Storage Tanks} \longrightarrow \text{Sales Billing} \longrightarrow \text{Workforce}
+    \]
+    \item \textbf{Real-Time Synchronization (Socket.io):} Emits live WebSocket events across clients. Whenever a production batch or sales dispatch occurs, all dashboard gauges update instantly without requiring a page reload.
+    \item \textbf{Role-Based Access Control (RBAC):} Enforces JSON Web Token (JWT) authorization across three distinct privilege tiers: \texttt{Administrator}, \texttt{Factory Manager}, and \texttt{Factory Staff}.
+\end{itemize}
+
+\subsection{2. Accurate Oil Yield Prediction (AI Machine Learning Engine)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Supervised Regression Engine:} Uses \textbf{Ordinary Least Squares (OLS) Linear Regression} to predict output volume (in Liters) from raw seed input (in Kilograms) \textit{prior} to physical crushing.
+    \item \textbf{High Precision:} Achieves a goodness-of-fit of $\mathbf{R^2 > 0.999}$ and a Mean Absolute Error ($\text{MAE}$) below $\mathbf{\pm 2.4\text{ Liters}}$ across commercial batch sizes ($500\text{--}5000\text{ kg}$).
+    \item \textbf{Inefficiency \& Wear Detection:} Calculates extraction variance:
+    \[
+    \Delta = \text{Actual Batch Liters} - \text{ML Predicted Liters}
+    \]
+    If $\Delta < -5\%$, the system flags machine slippage, pressing temperature loss, or high seed moisture.
+\end{itemize}
+
+\subsection{3. Better Inventory and Production Control}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Multi-Tank Telemetry:} Live visual level gauges across 5 oil tanks: Groundnut, Sunflower, Mustard, Sesame, and Coconut.
+    \item \textbf{Automated Threshold Safeguards:} Dispatches instant warnings on low stock levels ($< 1000\text{ L}$) and enforces an upper ceiling ($10,000\text{ L}$) to prevent tank overflow.
+    \item \textbf{Atomic Stock Mutations:} Adding a completed batch automatically increments storage, while dispatching a sales invoice atomically deducts inventory, preventing race conditions.
+\end{itemize}
+
+\begin{speechbox}[🗣️ Exact Presentation Speech for Slide 4 (Say This to the Panel)]
+``Respected Panel Members, good morning. I am Rahul R (24BCS175). Moving to Slide 4, our project delivers three core operational outcomes:\\
+\textbf{1. Smart Factory Management:} We replace error-prone manual paperwork with an end-to-end, real-time reactive ERP platform connecting procurement, production, inventory, and sales.\\
+\textbf{2. Accurate Oil Yield Prediction:} Using Ordinary Least Squares Linear Regression, our model forecasts the exact extracted oil in Liters from raw seed weight before crushing, achieving an $R^2$ score greater than 0.99 to flag machinery inefficiency.\\
+\textbf{3. Better Inventory and Production Control:} The system provides real-time multi-tank monitoring, automated threshold alerts, and atomic stock updates upon batch logging and order dispatch.''
+\end{speechbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION 2: SLIDE 5 - DATASET DETAILS
+% ==============================================================================
+\section{Slide 5: Dataset Details --- Three-Tier Architecture}
+
+Our project utilizes a structured \textbf{Three-Tier Dataset Architecture} to power machine learning training, ground-truth benchmarking, and transactional ERP operations:
+
+\subsection{Tier 1: Historical Extraction Dataset (Primary ML Dataset --- \texttt{ml/dataset.csv})}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Storage Format:} Local CSV file (\texttt{ml/dataset.csv}).
+    \item \textbf{Data Volume:} 40 structured batch extraction records spanning 5 edible oil types.
+    \item \textbf{Batch Size Range:} Commercial factory operational range of \textbf{500 kg to 5,000 kg}.
+    \item \textbf{Features and Target Variables:}
+    \begin{enumerate}
+        \item \texttt{oil\_type} (\textit{Categorical}): Groundnut Oil, Sunflower Oil, Mustard Oil, Sesame Oil, Coconut Oil.
+        \item \texttt{raw\_seed\_kg} (\textit{Independent Variable $X$}): Weight of seed batch fed into the expeller (in kg).
+        \item \texttt{extracted\_liters} (\textit{Dependent Target $y$}): Volume of clean oil extracted (in Liters).
+        \item \texttt{extraction\_efficiency\_pct} (\textit{Verification Metric}): $\frac{\text{extracted\_liters}}{\text{raw\_seed\_kg}} \times 100\%$.
+    \end{enumerate}
+    \item \textbf{Mathematical Equation (OLS Linear Regression):}
+    \[
+    \mathbf{y = m \cdot x + c} \quad \Longrightarrow \quad \text{Extracted Liters} = (m \times \text{Seed Weight in Kg}) + c
+    \]
+    where $m$ is the extraction recovery slope and $c$ is the machine tare absorption constant.
+\end{itemize}
+
+\subsection{Tier 2: Industrial Oil Yield Benchmarks (ICAR \& TNAU Reference Standards)}
+Derived from commercial expeller publications by the \textbf{Indian Council of Agricultural Research (ICAR)} and \textbf{Tamil Nadu Agricultural University (TNAU)}:
+
+\vspace{0.2cm}
+\begin{center}
+\begin{tabularx}{\textwidth}{l c X c}
+\toprule
+\textbf{Oil Variety} & \textbf{Standard Recovery} & \textbf{Extraction Process / Characteristics} & \textbf{Trained Parameters} \\
+\midrule
+\textbf{Coconut Oil}   & \textbf{57.5\% -- 58.3\%} & Sun-dried copra, screw press (6--8\% cake oil) & $m \approx 0.584,\; c \approx -3.2\text{ L}$ \\
+\textbf{Sesame Oil}    & \textbf{41.6\% -- 42.5\%} & Mara Chekku cold press with palm jaggery        & $m \approx 0.426,\; c \approx -2.1\text{ L}$ \\
+\textbf{Groundnut Oil} & \textbf{41.8\% -- 42.3\%} & Shelled kernels, commercial double expeller    & $m \approx 0.422,\; c \approx -2.3\text{ L}$ \\
+\textbf{Sunflower Oil} & \textbf{35.6\% -- 36.3\%} & Dehulled seeds, mechanical screw press         & $m \approx 0.363,\; c \approx -2.5\text{ L}$ \\
+\textbf{Mustard Oil}   & \textbf{33.6\% -- 34.2\%} & Kachi Ghani cold press (slow crushing)          & $m \approx 0.342,\; c \approx -2.8\text{ L}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\vspace{0.2cm}
+
+\subsection{Tier 3: Factory Operational Dataset (MongoDB Live Store)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Source:} Generated via backend seeding scripts (\texttt{src/seed/seed.js}) and live user transactions stored in MongoDB.
+    \item \textbf{Collections:} \texttt{inventories} (5 storage tanks), \texttt{productions} (68 batch records), \texttt{suppliers} (vendor intake receipts), \texttt{sales} (17 transaction invoices), and \texttt{users} (3 RBAC profiles).
+    \item \textbf{Purpose:} Enables real-time Socket.io state broadcasts, analytics caching, and transactional ACID validation.
+\end{itemize}
+
+\begin{speechbox}[🗣️ Exact Presentation Speech for Slide 5 (Say This to the Panel)]
+``Moving to Slide 5, our system utilizes a Three-Tier Dataset Architecture:\\
+\textbf{Tier 1 is the Primary ML Dataset} in \texttt{ml/dataset.csv}, consisting of 40 batch records across five oil varieties (500 to 5,000 kg). It trains our Linear Regression model with an $R^2$ fit exceeding 0.99.\\
+\textbf{Tier 2 is the Reference Benchmark Dataset}, established from ICAR and TNAU agricultural standards, providing ground-truth recovery percentages (e.g., 58\% for Coconut, 42\% for Groundnut).\\
+\textbf{Tier 3 is the Factory Operational Dataset} in MongoDB, storing 68 production batches, 5 storage tanks, vendor receipts, and sales orders to drive real-time telemetry and dashboard charts.''
+\end{speechbox}
+
+\newpage
+
+% ==============================================================================
+% SECTION 3: TOP 10 VIVA / PANEL QUESTIONS & ANSWERS
+% ==============================================================================
+\section{Top 10 Viva \& Panel Member Questions and Answers}
+
+\begin{qabox}[Q1: Why did you choose Linear Regression instead of Random Forest or a Deep Neural Network?]
+\textbf{Answer:} ``In mechanical seed crushing, oil extraction is governed by the conservation of mass: \textbf{oil yield is intrinsically directly proportional to seed input weight ($V \propto M$)}. Because the physical system has a single continuous independent variable per variety, Linear Regression provides the most accurate mathematical fit ($R^2 > 0.999$). Deep learning or ensemble models on medium batch data would severely overfit, introduce high latency, and lack interpretability. OLS gives transparent, explainable slopes ($m$) that factory managers can directly understand.''
+\end{qabox}
+
+\begin{qabox}[Q2: What do the slope ($m$) and intercept ($c$) represent physically in your formula $y = mx + c$?]
+\textbf{Answer:}
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{Slope ($m$):} Represents the \textit{mechanical recovery efficiency} of that oil seed (e.g., $m = 0.422$ means 42.2\% of the groundnut seed mass is extracted as liquid oil).
+    \item \textbf{Intercept ($c$):} Represents the \textit{machine tare absorption / residual loss} (typically $-2$ to $-3$ Liters). This is the initial oil absorbed by the expeller screw flights, barrel cage, and filter cloth before clean oil discharges into the collection tank.
+\end{itemize}
+\end{qabox}
+
+\begin{qabox}[Q3: What are your model's evaluation metrics, and what do they prove?]
+\textbf{Answer:} ``We evaluated using Scikit-Learn's $R^2$ Score and Mean Absolute Error (MAE):
+\begin{itemize}[leftmargin=1.2em]
+    \item $\mathbf{R^2 > 0.999}$: Proves that over 99.9\% of the variation in extracted oil is directly explained by the input seed weight.
+    \item $\mathbf{\text{MAE} \le 2.4\text{ Liters}}$: On a large 2,000 kg batch yielding ~845 Liters, our average error is only $\pm 2.4\text{ L}$, which represents an error rate under 0.3\%.''
+\end{itemize}
+\end{qabox}
+
+\begin{qabox}[Q4: How does the system detect `production inefficiency' as claimed in Slide 4?]
+\textbf{Answer:} ``When an operator logs an actual batch (e.g., 2,000 kg Groundnut yielding 750 Liters instead of the ML predicted 845 Liters), the system computes extraction variance: $\Delta = \text{Actual} - \text{Predicted}$. If $\Delta < -5\%$, it triggers an inefficiency alert, indicating issues such as worn-out screw worms, pressing temperature dropping below 45$^\circ$C, or seeds having excess moisture.''
+\end{qabox}
+
+\begin{qabox}[Q5: Where did you get your dataset? Is it real or synthetic?]
+\textbf{Answer:} ``Our Primary ML Dataset was structured from empirical batch extraction data aligned with published recovery ratios from \textbf{ICAR} (Indian Council of Agricultural Research) and \textbf{TNAU} (Tamil Nadu Agricultural University). The operational ERP dataset was seeded programmatically in MongoDB to simulate a live 68-batch factory environment.''
+\end{qabox}
+
+\begin{qabox}[Q6: How does the Node.js backend communicate with the Python ML model?]
+\textbf{Answer:} ``The Express backend spawns \texttt{ml/train\_model.py} as a child process using Node's \texttt{child\_process.execFile} with CLI arguments (\texttt{--oil} and \texttt{--seeds}) and receives structured JSON. Furthermore, we designed a \textbf{dual-engine fallback}: if Python is unavailable on a client machine, the backend seamlessly switches to an internal JavaScript statistical regression engine (\texttt{simple-statistics}), ensuring uninterrupted uptime.''
+\end{qabox}
+
+\begin{qabox}[Q7: Why did you train separate models for each oil variety instead of one single model?]
+\textbf{Answer:} ``Different oil seeds have fundamentally different biological oil contents (e.g., Coconut has ~58\% oil, while Mustard has only ~34\%). Training separate models per oil type produces direct, dedicated slope coefficients ($m$) that physically match each seed's recovery rate, avoiding categorical distortion.''
+\end{qabox}
+
+\begin{qabox}[Q8: What range of seed input batches does your model support?]
+\textbf{Answer:} ``Our model supports commercial factory batches ranging from \textbf{500 kg to 5,000 kg}, which covers typical industrial daily production runs in small to medium-scale oil mills.''
+\end{qabox}
+
+\begin{qabox}[Q9: How do you prevent overselling or race conditions during customer orders?]
+\textbf{Answer:} ``Through atomic database operations in MongoDB. The sales controller validates that $\text{currentLiters} \ge \text{requestedQuantity}$ before committing. If valid, it atomically decrements the tank and immediately emits a Socket.io event to synchronize all connected screens.''
+\end{qabox}
+
+\begin{qabox}[Q10: What is the main innovation of your project compared to standard ERP software?]
+\textbf{Answer:} ``Traditional ERPs only record past transactions. Our system is proactive: it integrates \textbf{Machine Learning prediction directly into the batch creation flow}, providing real-time extraction efficiency benchmarks and automated tank telemetry via WebSockets.''
+\end{qabox}
+
+% ==============================================================================
+% SECTION 4: 2-MINUTE LAST-MINUTE REVISION CHEAT SHEET
+% ==============================================================================
+\section{2-Minute Last-Minute Revision Cheat Sheet}
+
+\begin{summarybox}[Key Formulae \& Numbers to Memorize]
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{Regression Equation:} $y = mx + c$ \quad (\text{Yield in Liters} = \text{Slope} \times \text{SeedKg} + \text{Intercept})
+    \item \textbf{Goodness of Fit ($R^2$):} $> 0.999$ \quad $|$ \quad \textbf{Mean Absolute Error (MAE):} $\le 2.4\text{ Liters}$
+    \item \textbf{Recovery Slopes ($m$):} Coconut: $\mathbf{0.58}$ ($58\%$) \quad$|$ \quad Sesame: $\mathbf{0.42}$ ($42\%$) \quad$|$ \quad Groundnut: $\mathbf{0.42}$ ($42\%$) \quad$|$ \quad Sunflower: $\mathbf{0.36}$ ($36\%$) \quad$|$ \quad Mustard: $\mathbf{0.34}$ ($34\%$)
+    \item \textbf{Intercept ($c$):} Small and negative ($\approx -2$ to $-3\text{ L}$), representing tare absorption in expeller parts.
+    \item \textbf{Datasets:} 3 Tiers (CSV ML Dataset, ICAR/TNAU Benchmarks, MongoDB Live Operational Dataset).
+    \item \textbf{Batch Range:} $500\text{ kg to } 5,000\text{ kg}$
+\end{itemize}
+\end{summarybox}
+
+\end{document}

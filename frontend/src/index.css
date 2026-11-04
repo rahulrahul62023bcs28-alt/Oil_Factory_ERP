@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-main: #f1f5f9;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-hover: #f8fafc;
+  --bg-input: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --accent-primary: #2563eb;
+  --accent-light: #eff6ff;
+  --accent-border: #bfdbfe;
+  --card-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+}
+
+html.dark {
+  --bg-main: #080d1a;
+  --bg-panel: rgba(15, 23, 42, 0.95);
+  --bg-card: #111827;
+  --bg-hover: #1f2937;
+  --bg-input: #030712;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --accent-primary: #f59e0b;
+  --accent-light: rgba(245, 158, 11, 0.1);
+  --accent-border: rgba(245, 158, 11, 0.3);
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Dynamic CSS Variable Styled Classes */
+.glass-panel {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.glass-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+}
+
+/* Utilities for Theme Text & Inputs */
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-bg-input {
+  background-color: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.theme-border {
+  border-color: var(--border-color);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+/* ========================================================
+   CSS3 SPECIFICATION: TEXT SHADOWS & ROUNDED CORNERS
+   ======================================================== */
+
+/* CSS3 Text Shadows */
+.css3-text-shadow-heading {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.css3-text-shadow-glow {
+  text-shadow: 0 0 14px rgba(37, 99, 235, 0.7), 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.css3-text-shadow-gold {
+  text-shadow: 0 0 14px rgba(245, 158, 11, 0.7), 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.css3-text-shadow-subtle {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* CSS3 Rounded Corners (border-radius) */
+.css3-rounded-sm {
+  border-radius: 6px;
+}
+
+.css3-rounded-md {
+  border-radius: 12px;
+}
+
+.css3-rounded-card {
+  border-radius: 20px;
+}
+
+.css3-rounded-xl {
+  border-radius: 28px;
+}
+
+.css3-rounded-pill {
+  border-radius: 9999px;
+}
+
+/* ========================================================
+   SUBTLE & ELEGANT MOUSE HOVER ANIMATIONS
+   ======================================================== */
+
+/* Smooth hover transitions on interactive controls */
+button,
+a,
+select,
+input[type="range"],
+[role="button"],
+.cursor-pointer {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Gentle lift on hover */
+button:hover:not(:disabled),
+a:hover,
+[role="button"]:hover {
+  transform: translateY(-1.5px);
+}
+
+button:active:not(:disabled),
+a:active,
+[role="button"]:active {
+  transform: translateY(0.5px) scale(0.98);
+}
+
+/* Gentle panel elevation on hover */
+.glass-panel {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.glass-panel:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .glass-panel:hover {
+  box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================================
+   OFFICIAL A4 PRINT & PDF EXPORT SPECIFICATION
+   ======================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 12mm 12mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 9.5pt !important;
+    line-height: 1.4 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Completely hide sidebar, navbar, custom cursor, buttons, and decorative elements */
+  nav,
+  aside,
+  header,
+  .print\:hidden,
+  button,
+  .custom-cursor {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  /* Full-width container reset so content spans 100% A4 width */
+  .min-h-screen,
+  main,
+  div[class*="max-w-"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Remove scrollbars and max-height constraints */
+  .overflow-x-auto,
+  .overflow-y-auto,
+  .overflow-hidden {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+
+  /* Clean full-width tables */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: auto !important;
+    border-collapse: collapse !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  th,
+  td {
+    padding: 6px 8px !important;
+    font-size: 8.5pt !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  th {
+    background-color: #f1f5f9 !important;
+    color: #334155 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 7.5pt !important;
+    border-top: 1px solid #cbd5e1 !important;
+  }
+
+  /* Retain print colors and status badge styling */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

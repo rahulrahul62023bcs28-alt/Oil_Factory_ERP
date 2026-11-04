@@ -1,0 +1,23 @@
+{
+  "name": "oilfactory",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "mongo": "node scripts/start-mongo.js",
+    "dev": "concurrently -k -n \"MONGO,BACKEND,FRONTEND\" -c \"magenta,green,cyan\" \"npm run mongo\" \"npm run server\" \"npm run dev:client\"",
+    "dev:client": "npm run dev --prefix frontend",
+    "server": "npm run dev --prefix backend",
+    "start": "npm run dev",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend",
+    "preview": "npm run preview --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
